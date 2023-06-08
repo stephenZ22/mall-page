@@ -1,0 +1,17 @@
+.login-bg {
+    background-image: url('../../img/login.jpg'); 
+    background-size: cover;
+}
+
+.login-row {
+  height: 100vh; /* 设置行的高度为视口高度 */
+}
+  
+
+.login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* 设置右侧登录框的高度为100%，以填充整个行的高度 */
+}
+ 

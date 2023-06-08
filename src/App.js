@@ -8,7 +8,6 @@ import "./App.css";
 function App() {
   return (
     <div className="container mx-auto">
-      <h1>Mall</h1>
       <AppRouter></AppRouter>
     </div>
   );
