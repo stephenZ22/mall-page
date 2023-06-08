@@ -6,21 +6,26 @@ const Api = axios.create({
   baseURL: backendUrl,
 });
 
-Api.interceptors.request.use(
-  (config) => {
-    const authToken = useSelector((state) => state.authToken);
+export const ApiInterceptor = () => {
+  const authToken = useSelector((state) => state.authToken);
 
-    if (authToken) {
-      config.headers.Authorization = `${authToken}`;
+  Api.interceptors.request.use(
+    (config) => {
+      console.log("22222222");
+      console.log(config);
+      if (authToken) {
+        config.headers.Authorization = `${authToken}`;
+      }
+
+      config.headers["Content-Type"] = "application/json";
+      return config;
+    },
+
+    (error) => {
+      return Promise.reject(error);
     }
-
-    config.headers["Content-Type"] = "application/json";
-    return config;
-  },
-
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+  );
+  return null;
+};
 
 export default Api;

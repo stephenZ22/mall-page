@@ -1,30 +1,30 @@
 import React from "react";
-import { Form, Input, FormItem, Button, message } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { useDispatch } from "react-redux";
-import Api from "../../tools/api";
-
-function LoginForm({ onFinish }) {
+import Api, { ApiInterceptor } from "../../tools/api";
+import { useNavigate } from "react-router-dom";
+function LoginForm() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSubmit = (values) => {
-    // onFinish(values);
+  const HandleFinish = (values) => {
     Api.post("/users/login", {
       login_name: values.login_name,
-      password: values.password,
-    }).then((response) => {
-      const data = response.json();
-      const token = data.token;
+      pass_word: values.password,
+    })
+      .then((response) => {
+        dispatch({ type: "SET_TOKEN", payload: response.data.token });
+        message.success("登录成功");
 
-      dispatch({ type: "SET_TOKEN", payload: token });
-      message.success("登录成功");
-    });
-    //   .catch((error) => {
-    //     message.error("登录失败");
-    //   });
+        navigate("/");
+      })
+      .catch((error) => {
+        message.error("登录失败", error.message);
+      });
   };
 
   return (
-    <Form name="login" onFinish={handleSubmit}>
+    <Form onFinish={HandleFinish}>
       <Form.Item
         label="登录名"
         name="login_name"
