@@ -1,7 +1,7 @@
 // src/components/UserList.js
 
 import React, { useState, useEffect } from "react";
-import Config from "../config";
+import Config from "../../config";
 
 function UserList() {
   const [users, setUsers] = useState([]);
@@ -26,7 +26,7 @@ function UserList() {
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr key={user.id}>
+            <tr key={user.ID}>
               <td className="border border-gray-400 px-4 py-2">{user.ID}</td>
               <td className="border border-gray-400 px-4 py-2">
                 {user.login_name}
