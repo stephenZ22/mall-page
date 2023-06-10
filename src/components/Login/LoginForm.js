@@ -1,10 +1,9 @@
 import React from "react";
 import { Form, Input, Button, message } from "antd";
-import { useDispatch } from "react-redux";
 import Api from "../../tools/api";
 import { useNavigate } from "react-router-dom";
+
 function LoginForm() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const HandleFinish = (values) => {

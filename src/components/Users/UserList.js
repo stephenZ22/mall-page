@@ -9,8 +9,10 @@ function UserList() {
 
   useEffect(() => {
     Api.get("/users") // 发起 GET 请求获取用户数据
-      .then((response) => setUsers(response.data.data))
-      .catch((error) => console.error(error));
+      .then((response) => {
+        setUsers(response.data.data);
+      });
+    // .catch((error) => console.error(error));
   }, []);
 
   return (
