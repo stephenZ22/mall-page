@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import Config from "../../config";
+import Api from "../../tools/api";
 
 function UserList() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch(`${Config.userListPath}`, { mode: "cors" }) // 发起 GET 请求获取用户数据
-      .then((response) => response.json())
-      .then((data) => setUsers(data.data))
+    Api.get("/users") // 发起 GET 请求获取用户数据
+      .then((response) => setUsers(response.data.data))
       .catch((error) => console.error(error));
   }, []);
 

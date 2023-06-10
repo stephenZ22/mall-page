@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Input, Button, message } from "antd";
 import { useDispatch } from "react-redux";
-import Api, { ApiInterceptor } from "../../tools/api";
+import Api from "../../tools/api";
 import { useNavigate } from "react-router-dom";
 function LoginForm() {
   const dispatch = useDispatch();
@@ -13,14 +13,18 @@ function LoginForm() {
       pass_word: values.password,
     })
       .then((response) => {
-        dispatch({ type: "SET_TOKEN", payload: response.data.token });
+        refreshAuthToken(response.data.token);
         message.success("登录成功");
-
         navigate("/");
       })
       .catch((error) => {
         message.error("登录失败", error.message);
       });
+  };
+
+  const refreshAuthToken = (newToken) => {
+    localStorage.removeItem("authToken");
+    localStorage.setItem("authToken", newToken);
   };
 
   return (
